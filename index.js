@@ -25,9 +25,12 @@ app.post(NOTES_URL, (req, res) => {
 });
 
 app.delete(NOTES_URL, (req, res) => {
-    res.json({
-        status: 'deleted'
+    var note = req.body.note;
+    var index = notes.indexOf(note);
+    notes = notes.filter( (note, i) => {
+        return i !== index;
     });
+    res.json({deleted: note});
 });
 
 var frontend;
